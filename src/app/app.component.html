@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">{{account.name}}</h3>
+        </div>
+
+
+        <!---Put Account Stuff Here-->
+        <div class="panel-body">
+          <label for="name">Name: </label>
+          <input id="name" [(ngModel)]="account.name" placeholder="">
+          <h3>Current Balance: {{account.running_balance}}</h3>
+        </div>
+        
+
+        <div class="panel-body">
+          <form class="form-inline" (ngSubmit)="onSubmit(); tranModelForm.reset()" #tranModelForm="ngForm">
+            <div class="form-group">
+              <label>Description:</label>
+              <input name="name" [(ngModel)]="tranModel.description" required>
+            </div>
+
+            <div class="form-group">
+              <label>Amount:</label>
+              <input type="number" min=0 name="amount"  [(ngModel)]="tranModel.amount" required>
+
+            </div>
+
+            <label>Type:</label>
+            <select name="type" [(ngModel)]="tranModel.type" required>
+              <option *ngFor="let type of types" [value]="type">{{type}}</option>
+            </select>
+
+            <br />
+            <input type="submit" value="Save" [disabled]="!tranModelForm.form.valid || (account.running_balance - tranModel.amount < 0 && tranModel.type == 'Spend')">
+            <div *ngIf="account.running_balance - tranModel.amount < 0 && tranModel.type == 'Spend'">
+              You can't do that!
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!---Will show JSON tree
+    <pre>{{ getCurrentModel() }}</pre>-->
+    <div>
+      <table>
+        <tr>
+          <th><strong>Type</strong></th>
+          <th><strong>Amount</strong></th>
+          <th><strong>Description</strong></th>
+        </tr>
+        <tr *ngFor="let tran of trans" >
+          <th>{{tran.type}}</th>
+          <th>{{tran.amount}}</th>
+          <th>{{tran.description}}</th>
+        </tr>
+      </table>
+    </div>
+</div>
+
+
