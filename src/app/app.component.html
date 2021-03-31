@@ -7,7 +7,6 @@
           <h3 class="panel-title">{{account.name}}</h3>
         </div>
 
-
         <!---Put Account Stuff Here-->
         <div class="panel-body">
           <label for="name">Name: </label>
@@ -15,7 +14,6 @@
           <h3>Current Balance: {{account.running_balance}}</h3>
         </div>
         
-
         <div class="panel-body">
           <form class="form-inline" (ngSubmit)="onSubmit(); tranModelForm.reset()" #tranModelForm="ngForm">
             <div class="form-group">
@@ -35,10 +33,9 @@
               </select>
           </div>
             
-            
             <input type="submit" value="Save" [disabled]="!tranModelForm.form.valid || (account.running_balance - tranModel.amount < 0 && tranModel.type == 'Spend')">
             <div *ngIf="account.running_balance - tranModel.amount < 0 && tranModel.type == 'Spend'">
-              You can't do that!
+              You can't spend more than what you have!
             </div>
           </form>
         </div>
