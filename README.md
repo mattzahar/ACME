@@ -1,6 +1,6 @@
 # ACME
 
-## Development server
+## How to open/run project
 Open project in VSCode <br />
 `cd` to file location  <br />
 Run `ng serve  -o` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
