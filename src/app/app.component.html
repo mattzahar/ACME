@@ -23,7 +23,7 @@
 
             <div class="form-group">
               <label>Amount:</label>
-              <input type="number" min=0 name="amount"  [(ngModel)]="tranModel.amount" required>
+              <input type="number" min=0 name="amount"  [(ngModel)]="tranModel.amount" required allow-negative="false">
             </div>
             
             <div class="form-group">
@@ -32,10 +32,12 @@
                 <option *ngFor="let type of types" [value]="type">{{type}}</option>
               </select>
           </div>
-            
-            <input type="submit" value="Save" [disabled]="!tranModelForm.form.valid || (account.running_balance - tranModel.amount < 0 && tranModel.type == 'Spend')">
+            <input type="submit" value="Save" [disabled]="!tranModelForm.form.valid || tranModel.amount < 0 || (account.running_balance - tranModel.amount < 0 && tranModel.type == 'Spend')">
+            <div *ngIf="tranModel.amount < 0">
+              No negative values
+            </div>
             <div *ngIf="account.running_balance - tranModel.amount < 0 && tranModel.type == 'Spend'">
-              You can't spend more than what you have!
+              Balance cant go below 0
             </div>
           </form>
         </div>

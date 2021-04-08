@@ -36,7 +36,14 @@ export class AppComponent {
   }
 
   abs(val:number){
-    return Math.abs(val)
+    return Math.abs(val);
+  }
+
+  isNegative(val:number){
+    if (val < 0)
+      return true;
+    else
+      return false;
   }
 
 }
